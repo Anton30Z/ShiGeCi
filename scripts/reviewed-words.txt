@@ -1,0 +1,370 @@
+常|cháng|часто;обычный|often;usual|time
+车|chē|транспортное средство;машина|vehicle;car|travel
+国|guó|страна;государство|country;state|places
+好玩儿|hǎo wánr|интересный;занимательный|fun;entertaining|descriptions
+后|hòu|после;позади|after;behind|time
+面条儿|miàn tiáor|лапша|noodles|food
+男孩儿|nán háir|мальчик|boy|people
+女孩儿|nǚ háir|девочка|girl|people
+山|shān|гора|mountain|places
+小孩儿|xiǎo háir|ребёнок|child|people
+一点儿|yī diǎnr|немного;чуть-чуть|a little|basics
+一块儿|yī kuàir|вместе|together|basics
+一下儿|yī xiàr|немного;на мгновение|briefly;for a moment|time
+这里|zhè lǐ|здесь;это место|here;this place|places
+左|zuǒ|левый;слева|left;on the left|places
+查|chá|проверять;искать сведения|to check;to look up|actions
+成|chéng|становиться;получаться|to become;to succeed|actions
+蛋|dàn|яйцо|egg|food
+封|fēng|запечатывать;счётное слово для писем|to seal;classifier for letters|communication
+海|hǎi|море|sea|places
+黄|huáng|жёлтый|yellow|descriptions
+句|jù|предложение;счётное слово для фраз|sentence;classifier for utterances|communication
+快点儿|kuài diǎnr|побыстрее|hurry up|actions
+怕|pà|бояться|to fear|actions
+碰|pèng|задеть;столкнуться|to bump into;to touch|actions
+全|quán|весь;полный|whole;complete|descriptions
+药水|yào shuǐ|жидкое лекарство;лекарственный раствор|liquid medicine;medicinal solution|health
+咱|zán|мы (включая собеседника)|we (including the listener)|people
+占|zhàn|занимать;составлять долю|to occupy;to account for|actions
+纸|zhǐ|бумага|paper|home
+周|zhōu|неделя|week|time
+步|bù|шаг|step|actions
+费|fèi|расходы;тратить|fee;to spend|work
+福|fú|счастье;благополучие|good fortune;blessing|basics
+付|fù|платить;передавать|to pay;to hand over|actions
+干吗|gàn má|зачем;что делать|why;to do what|communication
+古|gǔ|древний|ancient|descriptions
+管|guǎn|труба;управлять|pipe;to manage|actions
+化|huà|превращаться;изменять|to transform;to change|actions
+环|huán|кольцо;окружать|ring;to encircle|basics
+金|jīn|золото;металл|gold;metal|basics
+老头儿|lǎo tóur|старик|old man|people
+乐|lè|радоваться;радость|to enjoy;joy|basics
+力|lì|сила|strength|basics
+牛|niú|корова;бык|cow;ox|places
+皮|pí|кожа;кожура|skin;peel|health
+期|qī|срок;период|period;term|time
+强|qiáng|сильный|strong|descriptions
+区|qū|район;зона|district;area|places
+任|rèn|занимать должность;поручать|to hold a post;to appoint|work
+室|shì|комната;помещение|room;chamber|home
+随|suí|следовать за;вместе с|to follow;along with|actions
+铁|tiě|железо|iron|basics
+围|wéi|окружать|to surround|actions
+线|xiàn|нить;линия|thread;line|home
+修|xiū|ремонтировать;исправлять|to repair;to mend|actions
+羊|yáng|овца;коза|sheep;goat|places
+游|yóu|плавать;путешествовать|to swim;to travel|travel
+照|zhào|освещать;фотографировать|to shine on;to photograph|actions
+钟|zhōng|часы;колокол|clock;bell|home
+祝|zhù|желать;поздравлять|to wish;to congratulate|communication
+转|zhuǎn|поворачивать;пересаживаться|to turn;to transfer|actions
+安|ān|спокойный;устанавливать|peaceful;to install|basics
+宝|bǎo|сокровище;драгоценность|treasure|home
+曾|céng|когда-то;прежде|once;formerly|time
+单|dān|одиночный;список|single;list|basics
+法|fǎ|закон;способ|law;method|basics
+归|guī|возвращаться;принадлежать|to return;to belong to|actions
+季|jì|сезон;квартал года|season;quarter of a year|time
+江|jiāng|река|river|places
+密|mì|густой;тайный|dense;secret|descriptions
+闹|nào|шуметь;устраивать переполох|to make noise;to make a fuss|actions
+散|sàn|расходиться;рассеивать|to disperse;to scatter|actions
+闪|shǎn|сверкать;уклоняться|to flash;to dodge|actions
+湿|shī|мокрый;влажный|wet;damp|descriptions
+松|sōng|сосна;неплотный|pine;loose|descriptions
+王|wáng|царь;король|king|people
+鲜|xiān|свежий|fresh|descriptions
+严|yán|строгий|strict|descriptions
+应|yīng|следует;должно|should;ought to|basics
+遇|yù|встретить;столкнуться с|to meet;to encounter|actions
+差点儿|chà diǎnr|чуть не;едва не|almost;nearly|basics
+差一点儿|chà yī diǎnr|чуть-чуть не хватило;чуть не|to fall just short;almost|basics
+迟|chí|поздний;опаздывать|late;to be late|time
+大都|dà dōu|по большей части;в большинстве своём|mostly;for the most part|basics
+滑|huá|скользкий;скользить|slippery;to slide|actions
+剪|jiǎn|резать ножницами|to cut with scissors|actions
+礼|lǐ|этикет;подарок|courtesy;gift|communication
+立|lì|стоять;устанавливать|to stand;to establish|actions
+兔|tù|кролик;заяц|rabbit;hare|places
+戏|xì|спектакль;театр|play;drama|communication
+熊|xióng|медведь|bear|places
+逼|bī|вынуждать;принуждать|to compel;to pressure|actions
+岛|dǎo|остров|island|places
+宫|gōng|дворец|palace|places
+顾|gù|заботиться о;учитывать|to look after;to take into account|actions
+揭|jiē|приподнимать;раскрывать|to lift off;to reveal|actions
+解|jiě|развязывать;разъяснять|to untie;to explain|actions
+景|jǐng|вид;пейзаж|view;scenery|places
+净|jìng|чистый;чисто|clean;net|descriptions
+据|jù|согласно;на основании|according to;on the basis of|communication
+阔|kuò|широкий;просторный|wide;spacious|descriptions
+赖|lài|полагаться на;сваливать вину|to rely on;to blame|actions
+利|lì|польза;выгода|benefit;profit|work
+聊天儿|liáo tiānr|болтать;беседовать|to chat|communication
+露|lù|роса;обнажать|dew;to reveal|places
+权|quán|право;власть|right;authority|work
+商城|shāng chéng|торговый центр|shopping mall|places
+踏|tà|ступать;наступать ногой|to tread;to step on|actions
+田|tián|поле|field|places
+拖|tuō|тащить;затягивать|to drag;to delay|actions
+新兴|xīn xīng|новый;зарождающийся|emerging;newly developing|descriptions
+仰|yǎng|поднимать голову;смотреть вверх|to raise one's head;to look up|actions
+印|yìn|печатать;печать|to print;seal|work
+于|yú|в;у;по отношению к|in;at;with respect to|basics
+园|yuán|сад;парк|garden;park|places
+原|yuán|первоначальный;равнина|original;plain|basics
+杂|zá|смешанный;разнообразный|mixed;miscellaneous|descriptions
+章|zhāng|глава;печать|chapter;seal|work
+钻|zuān|сверлить;проникать|to drill;to burrow|actions
+班长|bān zhǎng|староста класса;командир отделения|class monitor;squad leader|people
+后边|hòu bian|позади;сзади|behind;at the back|places
+药片|yào piàn|таблетка|tablet;pill|health
+你们|nǐ men|вы|you (plural)|people
+动|dòng|двигаться;трогать|to move;to touch|actions
+放假|fàng jià|уходить на каникулы;получать выходные|to go on holiday;to have time off|time
+熟人|shú rén|знакомый человек|acquaintance|people
+录|lù|записывать|to record|work
+房租|fáng zū|арендная плата за жильё|rent (for housing)|home
+底下|dǐ xia|внизу;под|under;below|places
+从小|cóng xiǎo|с детства|from childhood|time
+常见|cháng jiàn|распространённый;часто встречающийся|common;frequently seen|descriptions
+的话|de huà|если (после условия)|if (following a condition)|basics
+出租|chū zū|сдавать в аренду|to rent out|work
+不行|bù xíng|нельзя;не получится|not allowed;will not work|basics
+一番|yī fān|один раз;одна серия (действий)|one round;one instance|basics
+可乐|kě lè|кола|cola|food
+订|dìng|заказывать;бронировать|to order;to reserve|actions
+不论|bù lùn|независимо от|regardless of|basics
+连续剧|lián xù jù|телесериал|TV series|communication
+共有|gòng yǒu|иметь сообща;насчитывать всего|to share ownership;to have in total|basics
+白|bái|белый|white|descriptions
+百|bǎi|сто|hundred|basics
+班|bān|класс;смена|class;shift|work
+包|bāo|сумка;заворачивать|bag;to wrap|home
+别|bié|не надо;другой|do not;other|basics
+从|cóng|из;от|from|basics
+错|cuò|ошибка;ошибочный|mistake;wrong|descriptions
+东|dōng|восток|east|places
+都|dōu|все;оба|all;both|basics
+干|gàn|делать;работать|to do;to work|actions
+高|gāo|высокий|high;tall|descriptions
+关|guān|закрывать;выключать|to close;to switch off|actions
+过|guò|проходить;проводить время|to pass;to spend time|actions
+还|huán|возвращать;отдавать обратно|to return;to give back|actions
+和|hé|и;вместе с|and;with|basics
+花|huā|цветок;тратить|flower;to spend|places
+教|jiāo|учить кого-либо;преподавать|to teach|work
+老|lǎo|старый;пожилой|old;elderly|descriptions
+冷|lěng|холодный|cold|descriptions
+楼|lóu|многоэтажное здание;этаж|multistory building;floor|places
+路|lù|дорога;путь|road;path|travel
+毛|máo|шерсть;волосок|fur;hair|basics
+门|mén|дверь;ворота|door;gate|home
+那|nà|тот;та;то|that|basics
+南|nán|юг|south|places
+能|néng|мочь;быть способным|can;to be able to|basics
+年|nián|год|year|time
+钱|qián|деньги|money|basics
+三|sān|три|three|basics
+水|shuǐ|вода|water|food
+新|xīn|новый|new|descriptions
+也|yě|тоже;также|also;too|basics
+元|yuán|юань|yuan|basics
+坐|zuò|сидеть;ехать на транспорте|to sit;to take transport|actions
+段|duàn|отрезок;абзац|section;paragraph|basics
+红|hóng|красный|red|descriptions
+角|jiǎo|угол;рог|angle;horn|basics
+蓝|lán|синий;голубой|blue|descriptions
+米|mǐ|рис;метр|rice;meter|food
+平|píng|ровный;плоский|level;flat|descriptions
+题|tí|тема;задача|topic;question|work
+万|wàn|десять тысяч|ten thousand|basics
+闻|wén|слышать;чувствовать запах|to hear;to smell|actions
+向|xiàng|к;по направлению к|toward|basics
+姓名|xìng míng|фамилия и имя|full name|people
+雪|xuě|снег|snow|places
+阴|yīn|пасмурный;тенистый|overcast;shady|descriptions
+鱼|yú|рыба|fish|food
+组|zǔ|группа;организовывать|group;to organize|work
+刀|dāo|нож|knife|home
+富|fù|богатый|rich|descriptions
+火|huǒ|огонь|fire|basics
+纪录|jì lù|рекорд;запись|record|work
+连|lián|соединять;даже|to connect;even|basics
+龙|lóng|дракон|dragon|basics
+马|mǎ|лошадь|horse|places
+时|shí|время;час|time;hour|time
+束|shù|пучок;связывать|bundle;to bind|basics
+双|shuāng|пара;двойной|pair;double|basics
+谈|tán|беседовать;обсуждать|to talk;to discuss|communication
+汤|tāng|суп;бульон|soup;broth|food
+张|zhāng|счётное слово для плоских предметов;раскрывать|classifier for flat objects;to spread open|basics
+支|zhī|подпирать;счётное слово для длинных тонких предметов|to support;classifier for long thin objects|basics
+直|zhí|прямой;прямо|straight;directly|descriptions
+薄|báo|тонкий (о плоском предмете)|thin (of a flat object)|descriptions
+戴|dài|носить;надевать (головной убор или украшение)|to wear;to put on an accessory|actions
+方|fāng|квадратный;сторона|square;side|basics
+盖|gài|накрывать;крышка|to cover;lid|home
+官|guān|чиновник|official|people
+宽|kuān|широкий|wide|descriptions
+帅|shuài|красивый;статный|handsome|descriptions
+咸|xián|солёный|salty|food
+项|xiàng|пункт;счётное слово для проектов и мероприятий|item;classifier for projects and events|work
+延长|yán cháng|продлевать;удлинять|to prolong;to lengthen|actions
+摇|yáo|качать;трясти|to shake;to sway|actions
+资源|zī yuán|ресурсы|resources|work
+乘|chéng|ехать на транспорте;умножать|to ride;to multiply|travel
+丑|chǒu|некрасивый|ugly|descriptions
+冒|mào|выступать наружу;рисковать|to emit;to risk|actions
+枪|qiāng|огнестрельное оружие;копьё|gun;spear|basics
+扁|biǎn|плоский;сплюснутый|flat;flattened|descriptions
+党|dǎng|политическая партия|political party|work
+番|fān|раз;очередь (действий)|turn;instance|basics
+通道|tōng dào|проход;канал|passage;channel|places
+帮|bāng|помогать|to help|actions
+歌|gē|песня|song|communication
+考|kǎo|сдавать экзамен;проверять знания|to take an exam;to test|work
+中|zhōng|середина;среди|middle;among|basics
+词|cí|слово|word|communication
+加|jiā|добавлять;складывать|to add|actions
+鞋|xié|обувь|shoe|home
+村|cūn|деревня|village|places
+齐|qí|ровный;в полном составе|even;all present|descriptions
+土|tǔ|земля;почва|earth;soil|places
+证|zhèng|удостоверение;доказывать|certificate;to prove|work
+伙|huǒ|товарищ;группа людей|partner;group of people|people
+老公|lǎo gōng|муж (разговорное)|husband (colloquial)|people
+肠|cháng|кишечник|intestine|health
+脆|cuì|хрупкий;хрустящий|brittle;crisp|descriptions
+罚|fá|наказывать;штрафовать|to punish;to fine|actions
+鼓|gǔ|барабан;барабанить|drum;to beat a drum|communication
+广|guǎng|широкий;обширный|broad;extensive|descriptions
+暖|nuǎn|тёплый;согревать|warm;to warm up|descriptions
+琴|qín|музыкальный инструмент (обычно струнный)|musical instrument (usually stringed)|communication
+稍|shāo|слегка;немного|slightly;a little|basics
+射|shè|стрелять;испускать лучи|to shoot;to emit rays|actions
+愿|yuàn|желать;быть готовым|to wish;to be willing|basics
+灾|zāi|бедствие;катастрофа|disaster;calamity|basics
+正版|zhèng bǎn|лицензионное издание;подлинная версия|authorized edition;genuine version|work
+盗版|dào bǎn|пиратская копия|pirated copy|work
+剑|jiàn|обоюдоострый меч|double-edged sword|basics
+肯|kěn|соглашаться;быть готовым|to agree;to be willing|actions
+妙|miào|чудесный;искусный|wonderful;ingenious|descriptions
+清|qīng|прозрачный;ясный|clear;pure|descriptions
+野|yě|дикий;открытая местность|wild;open country|places
+因|yīn|причина;из-за|cause;because of|basics
+约|yuē|договариваться о встрече;примерно|to arrange to meet;approximately|communication
+追|zhuī|гнаться за;догонять|to chase;to pursue|actions
+败|bài|потерпеть поражение;проиграть|to be defeated;to lose|actions
+宝宝|bǎo bao|малыш;маленький ребёнок|baby;little child|people
+诚信|chéng xìn|честность и добросовестность|honesty and integrity|descriptions
+尺|chǐ|линейка;чи (мера длины)|ruler;chi (unit of length)|home
+大爷|dà ye|пожилой мужчина (уважительное обращение)|elderly man (respectful form of address)|people
+登|dēng|подниматься;взбираться|to ascend;to climb|actions
+含量|hán liàng|содержание вещества;концентрация|content;concentration|basics
+降温|jiàng wēn|понижать температуру;холодать|to cool down;to lower the temperature|places
+优良|yōu liáng|превосходный;высококачественный|excellent;high-quality|descriptions
+作出|zuò chū|принять (решение);совершить (действие)|to make (a decision);to carry out|actions
+体检|tǐ jiǎn|медицинский осмотр|medical examination|health
+外汇|wài huì|иностранная валюта|foreign exchange|work
+著作|zhù zuò|труд;произведение|written work;publication|communication
+做梦|zuò mèng|видеть сон;мечтать|to dream|health
+大胆|dà dǎn|смелый;смело|bold;boldly|descriptions
+单一|dān yī|единственный;однообразный|single;uniform|descriptions
+处在|chǔ zài|находиться в определённом положении|to be in a particular situation|basics
+加以|jiā yǐ|осуществлять (действие, названное далее)|to carry out (the following action)|actions
+救灾|jiù zāi|помогать пострадавшим от стихийного бедствия|to provide disaster relief|actions
+决不|jué bù|ни в коем случае не|absolutely not|basics
+年前|nián qián|до Нового года;лет назад (после числа)|before the New Year;years ago (after a number)|time
+令|lìng|приказывать;заставлять|to order;to cause|actions
+忍|rěn|терпеть;сдерживаться|to endure;to restrain oneself|actions
+使得|shǐ de|приводить к тому, что;делать возможным|to cause;to enable|basics
+为止|wéi zhǐ|вплоть до;до указанного момента|up to;until|time
+为主|wéi zhǔ|быть главным;преобладать|to predominate;to be the main element|basics
+先后|xiān hòu|по очереди;последовательно|in succession;one after another|time
+修养|xiū yǎng|воспитанность;самосовершенствование|cultivation;personal refinement|descriptions
+一下子|yī xià zi|сразу;внезапно|all at once;suddenly|time
+运|yùn|перевозить;удача|to transport;luck|travel
+糟|zāo|скверный;испорченный|terrible;spoiled|descriptions
+涨价|zhǎng jià|дорожать;повышать цену|to rise in price;to raise prices|work
+挣|zhèng|зарабатывать|to earn|work
+挨打|ái dǎ|получать побои|to be beaten|actions
+报考|bào kǎo|подавать заявление на экзамен|to register for an exam|work
+不成|bù chéng|не получаться;не годиться|to fail;to be unacceptable|basics
+不怎么样|bù zěn me yàng|так себе;не очень|so-so;not very good|descriptions
+产量|chǎn liàng|объём производства;урожайность|output;yield|work
+创建|chuàng jiàn|создавать;основывать|to create;to establish|actions
+创办|chuàng bàn|основывать;учреждать|to found;to establish|work
+打动|dǎ dòng|тронуть;растрогать|to move emotionally;to touch|actions
+打牌|dǎ pái|играть в карты или фишки|to play cards or tiles|actions
+档|dàng|разряд;передача (в машине)|grade;gear|basics
+刚好|gāng hǎo|как раз;ровно|just right;exactly|basics
+国会|guó huì|парламент|parliament|work
+好学|hào xué|любознательный;любящий учиться|fond of learning;studious|descriptions
+化解|huà jiě|разрешать (конфликт);устранять|to resolve;to defuse|actions
+截止|jié zhǐ|заканчиваться к указанному сроку|to end by a deadline|time
+救援|jiù yuán|спасать;оказывать экстренную помощь|to rescue;to provide emergency aid|health
+开夜车|kāi yè chē|работать или заниматься допоздна;вести машину ночью|to work late into the night;to drive at night|work
+联手|lián shǒu|объединять усилия|to join forces|actions
+面向|miàn xiàng|быть обращённым к;ориентироваться на|to face;to be aimed at|actions
+泡|pào|пузырь;замачивать;заваривать|bubble;to soak;to brew|basics
+聘请|pìn qǐng|приглашать на работу;нанимать|to hire;to engage professionally|work
+球员|qiú yuán|игрок команды|team player|people
+塞|sāi|затыкать;засовывать|to plug;to stuff into|actions
+试点|shì diǎn|пилотный проект;проводить испытание|pilot project;to run a trial|work
+同|tóng|одинаковый;вместе с|same;with|basics
+退票|tuì piào|сдавать билет;возврат билета|to return a ticket;ticket refund|travel
+望见|wàng jiàn|увидеть вдали|to see in the distance|actions
+物品|wù pǐn|вещи;предметы|items;articles|home
+血管|xuè guǎn|кровеносный сосуд|blood vessel|health
+一行|yī xíng|группа людей, едущих вместе;делегация|traveling party;delegation|people
+用得着|yòng de zháo|пригодиться;понадобиться|to be useful;to be needed|basics
+增值|zēng zhí|расти в цене;увеличиваться в стоимости|to appreciate in value|work
+驻|zhù|размещаться;находиться по месту службы|to be stationed;to be based|work
+总监|zǒng jiān|директор;руководитель направления|director;senior manager|people
+走私|zǒu sī|заниматься контрабандой|to smuggle|actions
+租金|zū jīn|арендная плата|rent;rent payment|home
+叫作|jiào zuò|называться|to be called|communication
+斤|jīn|цзинь (мера массы, в КНР 500 граммов)|jin (500 grams in mainland China)|basics
+凉|liáng|прохладный;остывать|cool;to cool down|descriptions
+合|hé|соответствовать;соединяться|to fit;to combine|actions
+开学|kāi xué|начинать учебный семестр или год|to begin a school term|work
+加油|jiā yóu|заправлять топливом;давай! (ободрение)|to refuel;come on!|communication
+卡|kǎ|карточка;карта|card|basics
+画儿|huàr|рисунок;картина|drawing;painting|communication
+过年|guò nián|праздновать китайский Новый год|to celebrate Chinese New Year|time
+外卖|wài mài|еда навынос;доставка еды|takeout;food delivery|food
+保安|bǎo ān|охранник;охрана|security guard;security|people
+建成|jiàn chéng|завершить строительство|to finish building|work
+建|jiàn|строить;учреждать|to build;to establish|actions
+开机|kāi jī|включать устройство|to switch on a device|actions
+一路顺风|yī lù shùn fēng|счастливого пути!|bon voyage!|travel
+一路平安|yī lù píng ān|счастливого пути!;благополучной дороги!|have a safe journey!|travel
+晚会|wǎn huì|вечернее праздничное мероприятие;концерт|evening gathering;gala|communication
+同学|tóng xué|одноклассник;однокурсник|classmate;fellow student|people
+饭馆|fàn guǎn|ресторан;столовая|restaurant;eatery|food
+所长|suǒ zhǎng|начальник учреждения;директор института|head of an institute;director|people
+体育馆|tǐ yù guǎn|спортивный зал;крытый стадион|gymnasium;indoor stadium|health
+没事儿|méi shìr|ничего страшного;быть свободным|it is all right;to have nothing to do|communication
+车上|chē shàng|в машине;в салоне транспорта|in a vehicle;aboard|travel
+上车|shàng chē|садиться в транспорт|to board a vehicle|travel
+下车|xià chē|выходить из транспорта|to get off a vehicle|travel
+听讲|tīng jiǎng|слушать объяснение или лекцию|to listen to a lecture|work
+谈话|tán huà|беседовать;разговор|to converse;conversation|communication
+组长|zǔ zhǎng|руководитель группы|group leader|people
+是不是|shì bu shì|так ли это?;правда ли? (общий вопрос)|is it or is it not?|communication
+真的|zhēn de|действительно;настоящий|really;genuine|basics
+电动车|diàn dòng chē|электротранспорт;электровелосипед|electric vehicle;electric bicycle|travel
+两边|liǎng biān|обе стороны;с обеих сторон|both sides;on either side|places
+不太|bù tài|не очень;не слишком|not very;not too|basics
+见过|jiàn guo|видел раньше;доводилось встречать|to have seen before|actions
+送到|sòng dào|доставить до места|to deliver to|actions
+这时候|zhè shí hou|в это время;в этот момент|at this time;at this moment|time
+放到|fàng dào|положить куда-либо|to put in or on|actions
+能不能|néng bu néng|можно ли;возможно ли|can or cannot (question)|communication
+眼里|yǎn lǐ|в глазах;с точки зрения|in one's eyes;in one's view|basics
+城里|chéng lǐ|в городе|in town|places
+很难说|hěn nán shuō|трудно сказать|hard to say|communication
+指着|zhǐ zhe|указывать на|to point at|actions

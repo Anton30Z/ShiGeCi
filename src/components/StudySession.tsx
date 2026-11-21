@@ -23,6 +23,7 @@ import { StrokeLayerCardVariant, type FaceIndex } from './cardlab/StrokeLayerCar
 import { CharacterDetailModal } from './cardlab/CharacterDetailModal';
 
 interface StudySessionProps {
+  sessionKey: string;
   queue: StudyQueueItem[];
   vocabWords: VocabWord[];
   progressMap: Record<string, WordProgress>;
@@ -38,6 +39,7 @@ interface StudySessionProps {
 }
 
 export const StudySession: React.FC<StudySessionProps> = ({
+  sessionKey,
   queue,
   vocabWords,
   progressMap,
@@ -51,10 +53,6 @@ export const StudySession: React.FC<StudySessionProps> = ({
   onStartQuiz,
   onExitSession,
 }) => {
-  const sessionKey = useMemo(
-    () => `shigeci_session_pos_${queue.map((q) => q.word.id).slice(0, 3).join('_')}_${queue.length}`,
-    [queue]
-  );
 
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
     try {

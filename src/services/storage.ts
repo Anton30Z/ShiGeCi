@@ -15,6 +15,7 @@ const DB_VERSION = 1;
 const STORE_HSK = 'hsk_wordlists';
 const STORE_STROKES = 'shigeci_strokes';
 
+const LS_LEARNING = 'shigeci_learning_v1';
 const LS_PROGRESS = 'shigeci_progress_v1';
 const LS_SETTINGS = 'shigeci_settings_v1';
 const LS_DAILY = 'shigeci_daily_v1';
@@ -127,7 +128,7 @@ export async function getCachedHskList(level: HskLevel): Promise<VocabWord[] | n
     return await new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_HSK, 'readonly');
       const store = tx.objectStore(STORE_HSK);
-      const req = store.get(`hsk-v3-${level}`);
+      const req = store.get(`hsk-v4-${level}`);
       req.onsuccess = () => resolve((req.result as VocabWord[] | undefined) ?? null);
       req.onerror = () => reject(req.error);
     });
@@ -142,7 +143,7 @@ export async function setCachedHskList(level: HskLevel, words: VocabWord[]): Pro
     await new Promise<void>((resolve, reject) => {
       const tx = db.transaction(STORE_HSK, 'readwrite');
       const store = tx.objectStore(STORE_HSK);
-      const req = store.put(words, `hsk-v3-${level}`);
+      const req = store.put(words, `hsk-v4-${level}`);
       req.onsuccess = () => resolve();
       req.onerror = () => reject(req.error);
     });
@@ -190,8 +191,8 @@ export async function getOfflineCacheStats(): Promise<{ cachedLevels: HskLevel[]
       req.onsuccess = () => {
         const keys = (req.result as string[]) || [];
         const levels = keys
-          .filter((k) => String(k).startsWith('hsk-v3-'))
-          .map((k) => Number(String(k).replace('hsk-v3-', '')))
+          .filter((k) => String(k).startsWith('hsk-v4-'))
+          .map((k) => Number(String(k).replace('hsk-v4-', '')))
           .filter((n): n is HskLevel => n >= 1 && n <= 6)
           .sort((a, b) => a - b);
         resolve(levels);
@@ -227,9 +228,10 @@ function hydrateCardDates(card: Card): Card {
 
 export function loadProgress(): Record<string, WordProgress> {
   try {
-    const raw = readWithLegacyMigration(LS_PROGRESS, LEGACY_LS_PROGRESS);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw) as Record<string, WordProgress>;
+    const combined = localStorage.getItem(LS_LEARNING);
+    const raw = combined ? null : readWithLegacyMigration(LS_PROGRESS, LEGACY_LS_PROGRESS);
+    if (!raw && !combined) return {};
+    const parsed = (combined ? JSON.parse(combined).progress : JSON.parse(raw!)) as Record<string, WordProgress>;
     const hydrated: Record<string, WordProgress> = {};
     for (const [key, item] of Object.entries(parsed)) {
       if (item && item.card) {
@@ -245,11 +247,12 @@ export function loadProgress(): Record<string, WordProgress> {
   }
 }
 
-export function saveProgress(progress: Record<string, WordProgress>): void {
+export function saveLearningState(progress: Record<string, WordProgress>, dailyStats: DailyStats): boolean {
   try {
-    localStorage.setItem(LS_PROGRESS, JSON.stringify(progress));
+    localStorage.setItem(LS_LEARNING, JSON.stringify({ progress, dailyStats }));
+    return true;
   } catch {
-    // Ignore quota errors
+    return false;
   }
 }
 
@@ -294,9 +297,10 @@ export function loadDailyStats(): DailyStats {
   const today = getLocalDateString();
   const yesterday = getYesterdayDateString();
   try {
-    const raw = readWithLegacyMigration(LS_DAILY, LEGACY_LS_DAILY);
-    if (!raw) return { ...DEFAULT_DAILY_STATS, date: today };
-    const parsed = JSON.parse(raw) as DailyStats;
+    const combined = localStorage.getItem(LS_LEARNING);
+    const raw = combined ? null : readWithLegacyMigration(LS_DAILY, LEGACY_LS_DAILY);
+    if (!raw && !combined) return { ...DEFAULT_DAILY_STATS, date: today };
+    const parsed = (combined ? JSON.parse(combined).dailyStats : JSON.parse(raw!)) as DailyStats;
     if (parsed.date === today) {
       return parsed;
     }
@@ -314,13 +318,6 @@ export function loadDailyStats(): DailyStats {
   }
 }
 
-export function saveDailyStats(stats: DailyStats): void {
-  try {
-    localStorage.setItem(LS_DAILY, JSON.stringify(stats));
-  } catch {
-    // Ignore
-  }
-}
 
 export function loadCustomWords(): VocabWord[] {
   try {
@@ -358,14 +355,65 @@ export function createBackupPayload(
   };
 }
 
+function record(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+function strings(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every(v => typeof v === 'string');
+}
+function timestamp(value: unknown) {
+  return typeof value === 'string' && Number.isFinite(Date.parse(value));
+}
+function calendarDay(value: unknown) {
+  return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && timestamp(value) &&
+    new Date(value).toISOString().slice(0, 10) === value;
+}
+function count(value: unknown) {
+  return typeof value === 'number' && Number.isSafeInteger(value) && value >= 0;
+}
+function validStats(s: unknown) {
+  return record(s) && calendarDay(s.date) && (s.lastStudyDate === null || calendarDay(s.lastStudyDate)) &&
+    [s.newWordsToday, s.reviewsToday, s.streak].every(count);
+}
+function validWord(w: unknown) {
+  if (!record(w) || w.level !== 0 || !['id','simplified','pinyin','plainPinyin','numericPinyin','radical'].every(k => typeof w[k] === 'string') ||
+      !w.id || !w.simplified || !strings(w.meanings) || !w.meanings.length ||
+      (w.isCustom !== undefined && typeof w.isCustom !== 'boolean') || w.study !== undefined || (w.meaningsRu !== undefined && !strings(w.meaningsRu))) return false;
+  const ex = w.example;
+  return ex === undefined || (record(ex) && ['zh','en','pinyin'].every(k => typeof ex[k] === 'string') &&
+    (ex.ru === undefined || typeof ex.ru === 'string'));
+}
+function validPreferences(s: unknown) {
+  if (!record(s) || typeof s.language !== 'string' || typeof s.theme !== 'string' || !count(s.dailyNewLimit)) return false;
+  const choices: Record<string, unknown[]> = {
+    language: ['ru','en'], theme: ['light','dark'], voiceMode: ['auto','local','network'],
+    voiceGender: ['any','male','female'], defaultSpeechRate: [0.7,1], dailyNewLimit: [3,5,7,10,15,20],
+  };
+  return Object.entries(choices).every(([k, values]) => s[k] === undefined || values.includes(s[k])) &&
+    ['toneColorsEnabled','showPinyin','autoPlayAudio'].every(k => s[k] === undefined || typeof s[k] === 'boolean') &&
+    (s.preferredVoiceURI === undefined || typeof s.preferredVoiceURI === 'string') &&
+    (s.activeHskLevels === undefined || Array.isArray(s.activeHskLevels) && s.activeHskLevels.every(n => Number.isInteger(n) && n >= 1 && n <= 6));
+}
+function validProgress(key: string, item: unknown) {
+  if (!key || ['__proto__', 'constructor', 'prototype'].includes(key) || !record(item) || item.wordId !== key || !timestamp(item.lastRatedAt) || !record(item.card)) return false;
+  const c = item.card;
+  return timestamp(c.due) && (c.last_review == null || timestamp(c.last_review)) &&
+    [0,1,2,3].includes(Number(c.state)) && count(c.state) &&
+    [c.reps,c.lapses,c.scheduled_days].every(count) && (c.learning_steps === undefined || count(c.learning_steps)) &&
+    [c.difficulty,c.stability].every(v => typeof v === 'number' && Number.isFinite(v) && v >= 0);
+}
+
 export function parseBackupPayload(jsonText: string): BackupPayload {
   const data = JSON.parse(jsonText) as Partial<BackupPayload>;
   const validApps = new Set(['Shi Ge Ci', 'HanziFlow 10']);
-  if (!data || !data.app || !validApps.has(data.app) || typeof data.progress !== 'object') {
+  if (!data || !data.app || !validApps.has(data.app) || data.version !== 1 || !timestamp(data.exportedAt) ||
+      !record(data.progress) || !Object.entries(data.progress).every(([id, p]) => validProgress(id, p)) ||
+      !validStats(data.dailyStats) || !validPreferences(data.settings) || !Array.isArray(data.customWords) ||
+      !data.customWords.every(validWord) || new Set(data.customWords.map(w => w.id)).size !== data.customWords.length) {
     throw new Error('Invalid Shi Ge Ci backup file.');
   }
 
-  const hydratedProgress: Record<string, WordProgress> = {};
+  const hydratedProgress: Record<string, WordProgress> = Object.create(null);
   for (const [key, item] of Object.entries(data.progress)) {
     if (item && item.card) {
       hydratedProgress[key] = {

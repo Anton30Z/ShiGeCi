@@ -1,4 +1,4 @@
-import type { LanguageCode, VocabWord } from '../types/vocab';
+import type { VocabWord } from '../types/vocab';
 
 export interface CharacterBreakdownPart {
   symbol: string;
@@ -149,37 +149,36 @@ const INSIGHTS_BY_WORD_ID: Record<string, WordDeepInsight> = {
   },
 };
 
-export function getWordInsight(word: VocabWord, language: LanguageCode): WordDeepInsight {
+export function getWordInsight(word: VocabWord): WordDeepInsight {
   const curated = INSIGHTS_BY_WORD_ID[word.id];
   if (curated) return curated;
 
-  const chars = Array.from(word.simplified);
-  const meaning = (language === 'ru' ? word.meaningsRu?.[0] : word.meanings[0]) ?? word.meanings[0] ?? '';
-
-  return {
-    parts: [
-      {
-        symbol: word.radical || chars[0] || word.simplified,
-        glossRu: 'ключевой элемент',
-        glossEn: 'radical element',
-      },
-      ...chars.slice(0, 2).map((ch) => ({
-        symbol: ch,
-        glossRu: 'знак слова',
-        glossEn: 'character',
-      })),
-    ],
-    formulaRu: `${word.simplified} = ${meaning}`,
-    formulaEn: `${word.simplified} = ${meaning}`,
-    mnemonicRu: `Запомните силуэт «${word.simplified}» через его ключ ${word.radical} и звучание «${word.pinyin}».`,
-    mnemonicEn: `Anchor "${word.simplified}" with radical ${word.radical} and sound "${word.pinyin}".`,
-    neighbors: [
-      {
-        zh: word.simplified,
-        pinyin: word.pinyin,
-        meaningRu: meaning,
-        meaningEn: word.meanings[0] ?? '',
-      },
-    ],
-  };
+  const material = word.study;
+  const parts = material?.parts.map(([symbol, glossRu, glossEn]) => ({symbol, glossRu, glossEn})) ??
+    Array.from(word.simplified).map((symbol, i) => ({
+      symbol, glossRu: word.pinyin.split(/\s+/)[i] ?? '', glossEn: word.pinyin.split(/\s+/)[i] ?? '',
+    }));
+  const neighbors = material?.neighbors.map(([zh, pinyin, meaningRu, meaningEn]) =>
+    ({ zh, pinyin, meaningRu, meaningEn })) ?? [];
+  const anchor = neighbors[0];
+  const common = anchor && Array.from(word.simplified).find(char => anchor.zh.includes(char));
+  const ru = word.meaningsRu?.[0] ?? word.meanings[0];
+  const en = word.meanings[0];
+  const layout = material?.layout;
+  if (layout && parts.length === 2) {
+    const [a,b] = parts;
+    const horizontal = layout === 'horizontal';
+    return {
+      parts, neighbors, formulaRu: ru, formulaEn: en,
+      mnemonicRu: `Посмотрите на «${word.simplified}»: ${horizontal ? 'слева' : 'сверху'} — ${a.symbol}, ${horizontal ? 'справа' : 'снизу'} — ${b.symbol}. Соберите знак по памяти и произнесите «${word.pinyin}».`,
+      mnemonicEn: `Look at ${word.simplified}: ${a.symbol} is on the ${horizontal ? 'left' : 'top'} and ${b.symbol} on the ${horizontal ? 'right' : 'bottom'}. Rebuild it from memory and say ${word.pinyin}.`,
+    };
+  }
+  const mnemonicRu = anchor && common
+    ? `Найдите «${common}» в двух словах: ${word.simplified} (${ru}) и ${anchor.zh} (${anchor.meaningRu}). Произнесите оба слова.`
+    : `Прочитайте «${word.simplified}» (${word.pinyin}), закройте знак и запишите его по памяти. Значение: ${ru}.`;
+  const mnemonicEn = anchor && common
+    ? `Find ${common} in ${word.simplified} (${en}) and ${anchor.zh} (${anchor.meaningEn}). Say both words aloud.`
+    : `Read ${word.simplified} (${word.pinyin}), cover it and write it from memory. Meaning: ${en}.`;
+  return { parts, neighbors, mnemonicRu, mnemonicEn, formulaRu: ru, formulaEn: en };
 }

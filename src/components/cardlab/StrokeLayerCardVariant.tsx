@@ -1241,7 +1241,7 @@ export const StrokeLayerCardVariant: React.FC<StrokeLayerCardVariantProps> = ({
   const tones = extractTonesForCharacters(word.simplified, word.numericPinyin, word.pinyin);
   const ruMeanings = getWordMeanings(word, 'ru');
   const enMeanings = word.meanings;
-  const insight = useMemo(() => getWordInsight(word, language), [word, language]);
+  const insight = useMemo(() => getWordInsight(word), [word]);
   const palladiusWord = useMemo(() => pinyinToPalladius(word.pinyin), [word.pinyin]);
 
   const stopProp = (e: React.MouseEvent | React.PointerEvent) => {

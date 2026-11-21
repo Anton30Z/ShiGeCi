@@ -55,8 +55,7 @@ import {
   loadSettings,
   parseBackupPayload,
   saveCustomWords,
-  saveDailyStats,
-  saveProgress,
+  saveLearningState,
   saveSettings,
 } from './services/storage';
 import { prewarmSpeechEngine, speakEnglish, speakMandarin } from './services/tts';
@@ -80,6 +79,7 @@ const SESSION_UI_KEY = 'shigeci_ui_state_v1';
 const LEGACY_SESSION_UI_KEY = 'hanziflow_ui_state_v1';
 
 interface SavedUIState {
+  sessionKey?: string;
   activeTab: NavTab;
   writingSeedWord: string;
   sessionQueue: StudyQueueItem[] | null;
@@ -110,6 +110,7 @@ function loadSavedUIState(): SavedUIState {
         typeof parsed.writingSeedWord === 'string' && parsed.writingSeedWord
           ? parsed.writingSeedWord
           : '永',
+      sessionKey: typeof parsed.sessionKey === 'string' ? parsed.sessionKey : undefined,
       sessionQueue: Array.isArray(parsed.sessionQueue) ? parsed.sessionQueue : null,
       quizWords: Array.isArray(parsed.quizWords) ? parsed.quizWords : null,
       showTonesTrainer: Boolean(parsed.showTonesTrainer),
@@ -135,6 +136,9 @@ export default function App() {
   const [customWords, setCustomWords] = useState<VocabWord[]>(() => loadCustomWords());
 
   const [activeTab, setActiveTab] = useState<NavTab>(initialUI.activeTab);
+  const [sessionKey, setSessionKey] = useState(() => initialUI.sessionKey ??
+    `shigeci_session_pos_${(initialUI.sessionQueue ?? []).slice(0, 3).map(q => q.word.id).join('_')}_${initialUI.sessionQueue?.length ?? 0}`);
+  const [saveFailed, setSaveFailed] = useState(false);
   const [sessionQueue, setSessionQueue] = useState<StudyQueueItem[] | null>(initialUI.sessionQueue);
   const [quizWords, setQuizWords] = useState<VocabWord[] | null>(initialUI.quizWords);
   const [showTonesTrainer, setShowTonesTrainer] = useState<boolean>(initialUI.showTonesTrainer);
@@ -169,6 +173,7 @@ export default function App() {
         JSON.stringify({
           activeTab,
           writingSeedWord,
+          sessionKey,
           sessionQueue,
           quizWords,
           showTonesTrainer,
@@ -177,7 +182,7 @@ export default function App() {
     } catch {
       // Ignore sessionStorage quota errors
     }
-  }, [activeTab, writingSeedWord, sessionQueue, quizWords, showTonesTrainer]);
+  }, [activeTab, writingSeedWord, sessionKey, sessionQueue, quizWords, showTonesTrainer]);
 
   const showToast = useCallback((text: string, tone: ToastMessage['tone'] = 'info') => {
     setToast({ id: Date.now(), text, tone });
@@ -203,12 +208,8 @@ export default function App() {
 
   // Persist state slices
   useEffect(() => {
-    saveProgress(progressMap);
-  }, [progressMap]);
-
-  useEffect(() => {
-    saveDailyStats(dailyStats);
-  }, [dailyStats]);
+    setSaveFailed(!saveLearningState(progressMap, dailyStats));
+  }, [progressMap, dailyStats]);
 
   useEffect(() => {
     saveCustomWords(customWords);
@@ -320,6 +321,14 @@ export default function App() {
     return { dueCount: due, masteredCount: mastered, totalLearnedCount: learned };
   }, [progressMap]);
 
+  const startStudyQueue = useCallback((queue: StudyQueueItem[]) => {
+    try {
+      if (sessionKey.startsWith('shigeci_session_pos_')) sessionStorage.removeItem(sessionKey);
+    } catch { /* The session can still run in memory. */ }
+    setSessionKey('shigeci_session_pos_' + Date.now() + '_' + Math.random().toString(36).slice(2));
+    setSessionQueue(queue);
+  }, [sessionKey]);
+
   const handleStartSession = (extraNew: boolean = false) => {
     const queue = buildDailySessionQueue(
       levelWords,
@@ -338,7 +347,7 @@ export default function App() {
 
     setQuizWords(null);
     setShowTonesTrainer(false);
-    setSessionQueue(queue);
+    startStudyQueue(queue);
     setActiveTab('today');
   };
 
@@ -352,10 +361,10 @@ export default function App() {
       });
       setQuizWords(null);
       setShowTonesTrainer(false);
-      setSessionQueue(queue);
+      startStudyQueue(queue);
       setActiveTab('today');
     },
-    [progressMap]
+    [progressMap, startStudyQueue]
   );
 
   const handleStartQuiz = useCallback((wordsToQuiz: VocabWord[]) => {
@@ -733,6 +742,8 @@ export default function App() {
               />
             ) : sessionQueue ? (
               <StudySession
+                key={sessionKey}
+                sessionKey={sessionKey}
                 queue={sessionQueue}
                 vocabWords={[...customWords, ...levelWords]}
                 progressMap={progressMap}
@@ -838,6 +849,10 @@ export default function App() {
         </div>
       )}
 
+      {saveFailed && <div role="alert" className="fixed top-2 inset-x-2 z-[90] mx-auto max-w-lg rounded-xl bg-amber-100 p-3 text-amber-950">
+        {settings.language === 'ru' ? 'Прогресс не сохранён на устройстве. Скачайте копию до закрытия вкладки.' : 'Progress could not be saved. Download a backup before closing this tab.'}
+        <button className="ml-2 underline" onClick={handleExportBackup}>{settings.language === 'ru' ? 'Скачать копию' : 'Download backup'}</button>
+      </div>}
       {toast && (
         <div
           role="status"

@@ -25,7 +25,15 @@ export interface ExampleSentence {
   ru?: string;
 }
 
+export interface StudyMaterial {
+  layout?: 'horizontal' | 'vertical';
+  parts: Array<[symbol: string, ru: string, en: string]>;
+  neighbors: Array<[word: string, pinyin: string, ru: string, en: string]>;
+  relation: 'character' | 'radical' | 'topic';
+}
+
 export interface VocabWord {
+  study?: StudyMaterial;
   id: string;
   simplified: string;
   pinyin: string;

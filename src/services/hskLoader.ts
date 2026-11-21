@@ -26,6 +26,7 @@ interface RawCompleteHskFormCompact {
 }
 
 interface RawHskEntry {
+  study?: VocabWord['study'];
   // Full complete-hsk-vocabulary schema
   simplified?: string;
   radical?: string;
@@ -109,16 +110,13 @@ function normalizeHskEntry(raw: RawHskEntry, level: HskLevel): VocabWord | null 
     meanings = starterMatch.meanings;
   }
 
-  const meaningsRu =
-    starterMatch?.meaningsRu && starterMatch.meaningsRu.length > 0
-      ? starterMatch.meaningsRu
-      : Array.isArray(raw.ru)
-        ? raw.ru.filter((m): m is string => typeof m === 'string' && m.trim().length > 0)
-        : undefined;
+  const localTranslations = raw.ru?.filter(m => typeof m === 'string' && m.trim());
+  const meaningsRu = localTranslations?.length ? localTranslations : starterMatch?.meaningsRu;
 
   const finalMeanings = meanings.length > 0 ? meanings : ['Mandarin vocabulary item'];
 
   return {
+    study: raw.study,
     id: `hsk${level}-${simplified}`,
     simplified,
     pinyin: pinyin || numericPinyin,

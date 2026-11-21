@@ -1,0 +1,6 @@
+Character decomposition in the study.parts and study.layout fields is adapted
+from Make Me a Hanzi dictionary.txt (https://github.com/skishore/makemeahanzi),
+derived from Unicode Unihan and CJKlib. These decomposition data are available
+under the GNU Lesser General Public License, version 3 or later.
+See MakeMeAHanzi-LGPL.txt. The conversion source is scripts/build_vocabulary.py
+in https://github.com/Anton30Z/ShiGeCi.

@@ -147,7 +147,6 @@ export const QuizSession: React.FC<QuizSessionProps> = ({
   onApplyQuizResults,
   onExit,
 }) => {
-  const [seed, setSeed] = useState(0);
   const [exercises, setExercises] = useState<QuizExercise[]>(() =>
     buildExercises(words, distractorPool)
   );
@@ -176,14 +175,14 @@ export const QuizSession: React.FC<QuizSessionProps> = ({
   // Summary state
   const [scheduledEntries, setScheduledEntries] = useState<BatchScheduleEntry[] | null>(null);
 
-  useEffect(() => {
+  const restartQuiz = () => {
     setExercises(buildExercises(words, distractorPool));
     setCurrentIdx(0);
     setWordOutcomeMap({});
     setSelectedOptionId(null);
     setChoiceCorrect(null);
     setScheduledEntries(null);
-  }, [words, distractorPool, seed]);
+  };
 
   const currentExercise = exercises[currentIdx];
   const isFinished = !currentExercise;
@@ -381,7 +380,7 @@ export const QuizSession: React.FC<QuizSessionProps> = ({
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <button
             type="button"
-            onClick={() => setSeed((s) => s + 1)}
+            onClick={restartQuiz}
             className="glass-subtle inline-flex min-h-[48px] items-center justify-center gap-2 rounded-2xl px-5 text-sm font-semibold text-slate-700 hover:bg-white/85 dark:text-slate-200 dark:hover:bg-slate-800/75 whitespace-nowrap"
           >
             <RefreshCw className="h-4 w-4" />
