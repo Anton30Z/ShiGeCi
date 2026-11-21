@@ -734,6 +734,7 @@ export default function App() {
             ) : sessionQueue ? (
               <StudySession
                 queue={sessionQueue}
+                vocabWords={[...customWords, ...levelWords]}
                 progressMap={progressMap}
                 settings={settings}
                 t={t}

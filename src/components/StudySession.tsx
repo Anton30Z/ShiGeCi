@@ -7,14 +7,10 @@ import {
   Eye,
   EyeOff,
   Palette,
-  PenTool,
   Play,
-  Snail,
   Sparkles,
-  Volume2,
 } from 'lucide-react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { getContextualExample } from '../data/starterHsk1';
 import type { TranslationDict } from '../i18n/translations';
 import {
   getOrCreateCard,
@@ -23,12 +19,12 @@ import {
   type StudyQueueItem,
 } from '../services/fsrsEngine';
 import type { AppSettings, VocabWord, WordProgress } from '../types/vocab';
-import { TONE_LEGEND } from '../utils/tones';
-import { HanziCanvas } from './HanziCanvas';
-import { ToneHanzi } from './ToneHanzi';
+import { StrokeLayerCardVariant, type FaceIndex } from './cardlab/StrokeLayerCardVariant';
+import { CharacterDetailModal } from './cardlab/CharacterDetailModal';
 
 interface StudySessionProps {
   queue: StudyQueueItem[];
+  vocabWords: VocabWord[];
   progressMap: Record<string, WordProgress>;
   settings: AppSettings;
   t: TranslationDict;
@@ -43,6 +39,7 @@ interface StudySessionProps {
 
 export const StudySession: React.FC<StudySessionProps> = ({
   queue,
+  vocabWords,
   progressMap,
   settings,
   t,
@@ -71,7 +68,10 @@ export const StudySession: React.FC<StudySessionProps> = ({
     }
     return 0;
   });
-  const [activeCardTab, setActiveCardTab] = useState<'card' | 'strokes'>('card');
+  const [face, setFace] = useState<FaceIndex>(0);
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const [rate, setRate] = useState<1 | 0.7>(settings.defaultSpeechRate === 0.7 ? 0.7 : 1);
+  const [character, setCharacter] = useState<string | null>(null);
   const [showForwardFsrs, setShowForwardFsrs] = useState(false);
   const [ratedIds, setRatedIds] = useState<string[]>(() => {
     try {
@@ -102,7 +102,8 @@ export const StudySession: React.FC<StudySessionProps> = ({
   const isCurrentRated = currentItem ? ratedIds.includes(currentItem.word.id) : false;
 
   useEffect(() => {
-    setActiveCardTab('card');
+    setFace(0);
+    setCharacter(null);
     setShowForwardFsrs(false);
   }, [currentIndex, currentItem?.word.id]);
 
@@ -130,7 +131,7 @@ export const StudySession: React.FC<StudySessionProps> = ({
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (isFinished) return;
+      if (isFinished || document.querySelector('[aria-modal="true"]')) return;
       const target = e.target as HTMLElement | null;
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) return;
       if (e.key === 'ArrowLeft') {
@@ -209,15 +210,12 @@ export const StudySession: React.FC<StudySessionProps> = ({
   }
 
   const { word, isNew } = currentItem;
-  const englishMeanings = word.meanings;
-  const russianMeanings = word.meaningsRu ?? [];
-  const example = getContextualExample(word, 'en');
   const progressPct = Math.round(((currentIndex + 1) / Math.max(1, queue.length)) * 100);
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === queue.length - 1;
 
   return (
-    <div className="mx-auto max-w-2xl space-y-5">
+    <div className="fixed inset-0 z-50 flex h-[100dvh] flex-col overflow-y-auto bg-[#f3f7f9] px-3 py-2 dark:bg-[#090d16] [&>*]:mx-auto [&>*]:w-full [&>*]:max-w-xl">
       {/* Clean Top Bar */}
       <div className="flex items-center justify-between gap-3">
         <button
@@ -279,183 +277,39 @@ export const StudySession: React.FC<StudySessionProps> = ({
         </div>
       </div>
 
-      {/* Main Flashcard (Spacious & Uncluttered) */}
-      <div className="glass-surface rounded-3xl p-6 sm:p-8 space-y-6">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
-            {word.level === 0 ? t.common.customWord : t.common.hskLevel(word.level)} ·{' '}
-            {t.common.radical} {word.radical}
-          </span>
-
-          <div className="glass-subtle inline-flex rounded-xl p-1">
-            <button
-              type="button"
-              onClick={() => setActiveCardTab('card')}
-              className={`inline-flex min-h-[38px] items-center gap-1.5 rounded-lg px-3.5 text-xs font-semibold transition-all whitespace-nowrap shrink-0 ${
-                activeCardTab === 'card'
-                  ? 'bg-teal-600 text-white shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
-              }`}
-            >
-              <Eye className="h-3.5 w-3.5" />
-              {t.session.flashcardTab}
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveCardTab('strokes')}
-              className={`inline-flex min-h-[38px] items-center gap-1.5 rounded-lg px-3.5 text-xs font-semibold transition-all whitespace-nowrap shrink-0 ${
-                activeCardTab === 'strokes'
-                  ? 'bg-teal-600 text-white shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
-              }`}
-            >
-              <PenTool className="h-3.5 w-3.5" />
-              {t.session.strokesTab}
-            </button>
-          </div>
-        </div>
-
-        {activeCardTab === 'strokes' ? (
-          <div className="py-2">
-            <HanziCanvas
-              word={word.simplified}
-              isDark={settings.theme === 'dark'}
-              t={t.canvas}
-              onSpeak={onSpeak}
-              size={250}
-            />
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {/* Hero Hanzi + Mandarin Audio */}
-            <div className="flex flex-col items-center text-center pt-2 space-y-4">
-              <div className="select-text text-6xl sm:text-7xl font-bold tracking-wide leading-tight">
-                <ToneHanzi
-                  simplified={word.simplified}
-                  numericPinyin={word.numericPinyin}
-                  pinyin={word.pinyin}
-                  toneColorsEnabled={settings.toneColorsEnabled}
-                />
-              </div>
-
-              {settings.showPinyin ? (
-                <p className="text-2xl font-semibold text-teal-700 dark:text-teal-300 tracking-wide">
-                  {word.pinyin}
-                </p>
-              ) : (
-                <button
-                  type="button"
-                  onClick={onTogglePinyin}
-                  className="text-xs font-medium text-slate-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
-                >
-                  {t.session.pinyinHidden}
-                </button>
-              )}
-
-              {settings.toneColorsEnabled && (
-                <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] font-medium opacity-85">
-                  {TONE_LEGEND.map((item) => (
-                    <span key={item.tone} className={item.colorClass}>
-                      {item.mark} {t.session.toneLabels[item.tone]}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
-                <button
-                  type="button"
-                  onClick={() => onSpeak(word.simplified, 1.0)}
-                  className="glass-subtle inline-flex min-h-[44px] items-center gap-2 rounded-xl px-4 text-xs font-semibold text-slate-700 hover:bg-white/85 dark:text-slate-100 dark:hover:bg-slate-800/75 whitespace-nowrap shrink-0"
-                >
-                  <Volume2 className="h-4 w-4 text-teal-600 dark:text-teal-400" />
-                  {t.session.playNormal}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onSpeak(word.simplified, 0.7)}
-                  className="glass-subtle inline-flex min-h-[44px] items-center gap-2 rounded-xl px-4 text-xs font-semibold text-slate-700 hover:bg-white/85 dark:text-slate-100 dark:hover:bg-slate-800/75 whitespace-nowrap shrink-0"
-                >
-                  <Snail className="h-4 w-4 text-sky-600 dark:text-sky-400" />
-                  {t.session.playSlow}
-                </button>
-              </div>
-            </div>
-
-            {/* Bilingual Translation Block */}
-            <div className="space-y-3 border-t border-slate-900/10 pt-5 dark:border-white/10 text-center">
-              {russianMeanings.length > 0 && (
-                <p className="text-xl font-bold text-slate-900 dark:text-white leading-snug">
-                  {russianMeanings.join(' · ')}
-                </p>
-              )}
-
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                <p className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300">
-                  {englishMeanings.join(' · ')}
-                </p>
-                <button
-                  type="button"
-                  onClick={() =>
-                    onSpeakEnglish(
-                      englishMeanings.slice(0, 2).join(', '),
-                      settings.defaultSpeechRate
-                    )
-                  }
-                  className="glass-subtle inline-flex min-h-[34px] items-center gap-1 rounded-xl px-2.5 text-xs font-bold text-sky-700 hover:bg-white dark:text-sky-300 dark:hover:bg-slate-800 whitespace-nowrap shrink-0"
-                  title={t.session.listenEnglish}
-                  aria-label={`${t.session.listenEnglish}: ${englishMeanings.slice(0, 2).join(', ')}`}
-                >
-                  <Volume2 className="h-3.5 w-3.5" />
-                  EN
-                </button>
-              </div>
-            </div>
-
-            {/* Example Sentence */}
-            <div className="glass-subtle rounded-2xl p-4 flex items-start justify-between gap-3">
-              <div className="space-y-1 min-w-0">
-                <p className="font-hanzi text-base font-medium text-slate-900 dark:text-white">
-                  {example.zh}
-                </p>
-                {settings.showPinyin && (
-                  <p className="text-xs text-teal-700 dark:text-teal-300">{example.pinyin}</p>
-                )}
-                {example.ru && (
-                  <p className="text-xs font-medium text-slate-800 dark:text-slate-100">
-                    {example.ru}
-                  </p>
-                )}
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {example.en}
-                </p>
-              </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => onSpeak(example.zh, settings.defaultSpeechRate)}
-                  className="glass-surface inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl text-teal-700 hover:bg-white dark:text-teal-300 dark:hover:bg-slate-800"
-                  title={t.session.listenExample}
-                  aria-label={t.session.listenExample}
-                >
-                  <Volume2 className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onSpeakEnglish(example.en, settings.defaultSpeechRate)}
-                  className="glass-surface inline-flex min-h-[44px] px-2.5 items-center justify-center rounded-xl text-xs font-bold text-sky-700 hover:bg-white dark:text-sky-300 dark:hover:bg-slate-800"
-                  title={t.session.listenEnglish}
-                  aria-label={`${t.session.listenEnglish}: ${example.en}`}
-                >
-                  EN
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+      <div className="relative min-h-[430px] flex-1">
+        <StrokeLayerCardVariant
+          key={word.id}
+          word={word}
+          activeFace={face}
+          turnDirection={direction}
+          onTurnFace={(next, dir) => { setDirection(dir); setFace(next); }}
+          showPinyin={settings.showPinyin}
+          toneColorsEnabled={settings.toneColorsEnabled}
+          speechRate={rate}
+          onToggleSpeechRate={() => setRate(rate === 1 ? 0.7 : 1)}
+          language={settings.language}
+          isDark={settings.theme === 'dark'}
+          t={t}
+          onInspectChar={setCharacter}
+          onSpeak={(text, speed) => onSpeak(text, speed ?? rate)}
+          onSpeakEnglish={(text, speed) => onSpeakEnglish(text, speed ?? rate)}
+        />
       </div>
+      <CharacterDetailModal char={character} vocabWords={vocabWords} isDark={settings.theme === 'dark'}
+        language={settings.language} t={t} onSpeak={onSpeak} onClose={() => setCharacter(null)} />
 
       {/* Clean Bottom Navigation: Back / Forward -> FSRS reveals when going Forward */}
+      {word.example && !showForwardFsrs && (
+        <details key={word.id} className="shrink-0 px-2 py-1 text-sm">
+          <summary className="cursor-pointer">{settings.language === 'ru' ? 'Пример в предложении' : 'Example sentence'}</summary>
+          <button type="button" className="py-2 text-left font-semibold" onClick={() => onSpeak(word.example!.zh, rate)}>
+            {word.example.zh} ♫
+          </button>
+          {settings.showPinyin && <p>{word.example.pinyin}</p>}
+          <p>{settings.language === 'ru' ? word.example.ru ?? word.example.en : word.example.en}</p>
+        </details>
+      )}
       {!showForwardFsrs ? (
         <div className="space-y-2">
           <div className="flex items-center justify-between gap-3">
