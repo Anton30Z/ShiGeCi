@@ -1,0 +1,311 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    --font-hanzi: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: #f3f7f9;
+    color: #0f172a;
+    overflow-x: hidden;
+  }
+
+  .dark body {
+    background-color: #090d16;
+    color: #f1f5f9;
+  }
+}
+
+.font-hanzi {
+  font-family: var(--font-hanzi);
+}
+
+.font-mono-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.glass-surface {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow: 0 10px 34px -8px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.dark .glass-surface {
+  background: rgba(15, 23, 42, 0.62);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow: 0 14px 38px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.dark .glass-subtle {
+  background: rgba(30, 41, 59, 0.48);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  border-color: rgba(255, 255, 255, 0.75);
+}
+
+.dark .glass-nav {
+  background: rgba(9, 13, 22, 0.78);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+@keyframes droplet-wobble {
+  0%, 100% {
+    transform: scaleX(1) scaleY(1);
+  }
+  50% {
+    transform: scaleX(1.045) scaleY(0.955);
+  }
+}
+
+@keyframes puddle-spread {
+  0% {
+    transform: translate(-50%, 0) scaleX(0.35) scaleY(1.2);
+    opacity: 0.95;
+  }
+  45% {
+    transform: translate(-50%, 2px) scaleX(2.1) scaleY(0.38);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-50%, 4px) scaleX(3.5) scaleY(0.16);
+    opacity: 0;
+  }
+}
+
+@keyframes puddle-ring {
+  0% {
+    transform: translate(-50%, 0) scaleX(0.3) scaleY(0.3);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, 0) scaleX(2.9) scaleY(0.7);
+    opacity: 0;
+  }
+}
+
+@keyframes splash-arc-left {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-28px, -34px) scale(0.95);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-48px, 6px) scale(0.35);
+    opacity: 0;
+  }
+}
+
+@keyframes splash-arc-right {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(28px, -34px) scale(0.95);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(48px, 6px) scale(0.35);
+    opacity: 0;
+  }
+}
+
+@keyframes splash-arc-up {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  55% {
+    transform: translate(0, -44px) scale(1.05);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(0, 4px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes char-melt {
+  0% {
+    transform: translate(-50%, -18px) scaleX(1) scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, 0) scaleX(1.7) scaleY(0.45);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-50%, 6px) scaleX(2.5) scaleY(0.15);
+    opacity: 0;
+  }
+}
+
+@keyframes anime-comic-pop {
+  0% {
+    transform: scale(0.35) rotate(-8deg);
+    opacity: 0;
+  }
+  55% {
+    transform: scale(1.14) rotate(-2deg);
+    opacity: 1;
+  }
+  78% {
+    transform: scale(0.96) rotate(-3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-2deg);
+    opacity: 1;
+  }
+}
+
+@keyframes anime-starburst {
+  0% {
+    transform: translate(-50%, -50%) scale(0.25) rotate(0deg);
+    opacity: 0;
+  }
+  25% {
+    transform: translate(-50%, -50%) scale(1.12) rotate(16deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.4) rotate(36deg);
+    opacity: 0;
+  }
+}
+
+@keyframes anime-spark-out {
+  0% {
+    transform: translate(0, 0) scale(0.4) rotate(0deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--sx, 40px), var(--sy, -40px)) scale(1.15) rotate(90deg);
+    opacity: 0;
+  }
+}
+
+@keyframes arena-bump {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    transform: translate3d(-5px, 2px, 0);
+  }
+  45% {
+    transform: translate3d(5px, -1px, 0);
+  }
+  70% {
+    transform: translate3d(-3px, 1px, 0);
+  }
+}
+
+.animate-droplet-wobble {
+  animation: droplet-wobble 2.2s ease-in-out infinite;
+}
+
+.animate-puddle-spread {
+  animation: puddle-spread 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-puddle-ring {
+  animation: puddle-ring 650ms ease-out forwards;
+}
+
+.animate-splash-left {
+  animation: splash-arc-left 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-splash-right {
+  animation: splash-arc-right 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-splash-up {
+  animation: splash-arc-up 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-char-melt {
+  animation: char-melt 580ms ease-out forwards;
+}
+
+.animate-anime-pop {
+  animation: anime-comic-pop 380ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-anime-starburst {
+  animation: anime-starburst 880ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-anime-spark {
+  animation: anime-spark-out 780ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-arena-bump {
+  animation: arena-bump 320ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

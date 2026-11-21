@@ -1,0 +1,50 @@
+================================================================================
+ГОТОВЫЙ ПРОМПТ ДЛЯ GOOGLE AI STUDIO (РЕЖИМ BUILD)
+Инструкция: Скопируйте текст ниже (от блока ROLE до конца) и вставьте в чат
+во вкладке Build в Google AI Studio (https://aistudio.google.com).
+================================================================================
+
+ROLE & GOAL:
+Act as a Senior Full-Stack & Mobile PWA Engineer. Build a complete, responsive, offline-capable Progressive Web App (PWA) optimized for Android smartphones and desktop browsers for learning Mandarin Chinese ("HanziFlow 10").
+The core learning methodology is strictly 10 new words per day combined with FSRS spaced repetition, native TTS audio pronunciation, and interactive stroke-order writing practice.
+
+TECH STACK & VERIFIED OPEN-SOURCE LIBRARIES (NO PAID API KEYS REQUIRED):
+1. Framework: React + TypeScript + Vite + Tailwind CSS.
+2. Icons: `lucide-react`.
+3. Spaced Repetition Engine: `ts-fsrs` (official Open Spaced Repetition TypeScript library, MIT license) — implement standard 4-button rating: Again, Hard, Good, Easy.
+4. Stroke Order & Handwriting Practice: `hanzi-writer` (v3.7+, MIT license) loading character stroke JSON data from jsDelivr CDN (`https://cdn.jsdelivr.net/npm/hanzi-writer-data@2.0/${char}.json`) with local caching in IndexedDB/Cache API so learned characters work offline.
+5. Audio Pronunciation (Zero-cost, Offline-ready): Native Browser Web Speech API (`window.speechSynthesis`) configured for `zh-CN` (Mandarin), with adjustable playback speed (0.7x slow for tones, 1.0x normal) and graceful fallback alert if Chinese TTS voice is not installed on the device.
+6. Vocabulary Data Source:
+   - Fetch verified open-source HSK JSON wordlists from GitHub via jsDelivr CDN:
+     `https://cdn.jsdelivr.net/gh/drkameleon/complete-hsk-vocabulary@main/wordlists/exclusive/new/1.json` (and levels 2, 3, 4 on demand) which includes simplified characters (`s`), pinyin with tone marks (`p`), numeric pinyin (`n`), radicals (`r`), and English definitions (`m`).
+   - Include a built-in fallback starter pack of the first 30 HSK 1 words directly in the code so the app works immediately even on the very first offline launch.
+7. Local Storage & PWA:
+   - Persist all user progress, FSRS card states, daily limits, streak counter, and cached wordlists in `localStorage` / `IndexedDB`.
+   - Include a valid `manifest.json` and Service Worker configuration so the user can tap "Add to Home Screen" on Android Chrome and use the app as a standalone full-screen mobile app.
+
+CORE FEATURES & USER FLOW:
+1. Dashboard (Home Screen):
+   - Daily Goal Progress Ring: Shows "New Words Today: X / 10" (configurable from 5 to 20 in Settings) and "Cards Due for Review: Y".
+   - Big primary CTA button: "Start Today's Session".
+   - HSK Level Selector (HSK 1 to HSK 6) + Daily Study Streak counter + Total Mastered Words counter.
+   - Export / Import JSON backup button (so the user never loses progress when switching devices).
+
+2. Daily Learning & Review Session (Flashcard + Interactive Practice):
+   - Step A (Front of Card): Shows Simplified Hanzi (with optional toggleable tone-colored characters: 1st tone red, 2nd green, 3rd blue, 4th purple, neutral gray), auto-plays `zh-CN` audio, and includes a "Play Slow (0.7x)" button.
+   - Step B (Back of Card): Reveals Pinyin, English meanings, radical breakdown, and a contextual example sentence (generated locally or via dictionary examples) with its own audio button.
+   - Step C (Interactive Stroke Order Modal / Tab): Embeds `HanziWriter` with two modes: "Watch Animation" (shows stroke order) and "Practice Drawing" (user draws strokes with finger/mouse; highlights mistakes and celebrates completion). For multi-character words, allow switching between each character cleanly.
+   - Step D (FSRS Grading): 4 buttons at the bottom (`Again`, `Hard`, `Good`, `Easy`) showing the exact next review interval calculated by `ts-fsrs` (e.g., `< 10m`, `1d`, `4d`).
+
+3. Vocabulary Browser & Built-in Mini-Dictionary:
+   - Searchable list of all loaded HSK words (search by Hanzi, Pinyin without tone numbers, or English meaning).
+   - Filter by status: All, New, Learning, Mastered.
+   - Ability to add custom user words manually (Hanzi, Pinyin, Meaning).
+
+4. UI / UX & Mobile Optimization:
+   - Mobile-first clean design (max-width container centered on desktop, full-bleed touch-friendly UI on Android).
+   - Bottom navigation bar on mobile (`Today`, `Vocabulary`, `Writing`, `Settings`).
+   - Dark mode and Light mode toggle.
+   - Clean, distraction-free typography with large readable Chinese characters (`Noto Sans SC` / system Chinese sans-serif font).
+
+BUILD INSTRUCTIONS:
+Generate all necessary files cleanly, ensure there are zero TypeScript or runtime errors, verify that `hanzi-writer` and `ts-fsrs` imports match their current v3/v6 APIs, and handle network errors gracefully when fetching external HSK JSON files.
